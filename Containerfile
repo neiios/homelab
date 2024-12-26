@@ -1,4 +1,4 @@
-FROM ghcr.io/ublue-os/base-main:latest
+FROM ghcr.io/ublue-os/ucore-minimal:latest
 
 ADD etc etc
 
