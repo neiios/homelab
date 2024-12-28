@@ -12,6 +12,6 @@ RUN dnf5 install -y htop && \
     echo "EDITOR=NVIM" >> /etc/profile
 
 RUN systemctl enable podman.socket podman-auto-update.timer && \
-    sudo -u core systemctl --user enable podman.socket podman-auto-update.timer
+    su core -c "systemctl --user enable podman.socket podman-auto-update.timer"
 
 RUN bootc container lint
