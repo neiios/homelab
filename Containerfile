@@ -13,6 +13,7 @@ RUN dnf5 install -y htop && \
 ADD etc etc
 
 RUN systemctl enable podman.socket podman-auto-update.timer && \
-    su core -c "systemctl --user enable podman.socket podman-auto-update.timer"
+    su core -c "systemctl --user enable podman.socket podman-auto-update.timer" && \
+    echo "hel" > /etc/hostname
 
 RUN bootc container lint
