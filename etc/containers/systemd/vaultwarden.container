@@ -13,6 +13,9 @@ Environment=DOMAIN=https://bw.sgf.lt
 Environment=SIGNUPS_ALLOWED=false
 Environment=SMTP_HOST=mail.sgf.lt SMTP_FROM=robotukas@sgf.lt SMTP_USERNAME=robotukas@sgf.lt
 Environment=EXPERIMENTAL_CLIENT_FEATURE_FLAGS=extension-refresh
+# Uhm, this is a pretty bad privacy issue in the Bitwarden protocol
+# https://bitwarden.com/help/website-icons/
+Environment=DISABLE_ICON_DOWNLOAD=true
 Secret=vaultwarden-admin-token,type=env,target=ADMIN_TOKEN
 Secret=vaultwarden-smtp-password,type=env,target=SMTP_PASSWORD
 
