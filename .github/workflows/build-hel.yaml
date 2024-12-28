@@ -13,7 +13,7 @@ jobs:
 
     runs-on: ubuntu-latest 
     env:
-      IMAGE_NAME: homelab-bootc
+      IMAGE_NAME: homelab-hel
       REGISTRY: ghcr.io/neiios
    
     steps:

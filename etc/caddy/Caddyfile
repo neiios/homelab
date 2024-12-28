@@ -1,0 +1,7 @@
+hel.sgf.lt {
+	respond "Oh, hi Mark!"
+}
+
+bw.sgf.lt {
+	reverse_proxy 127.0.0.1:8000
+}

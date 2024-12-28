@@ -1,0 +1,2 @@
+- Populate secrets on first boot (e.g. Vaultwarden)
+- Use cosign
