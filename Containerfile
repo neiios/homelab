@@ -9,6 +9,7 @@ ADD etc etc
 
 RUN dnf5 install -y htop && \
     dnf5 install -y --setopt=install_weak_deps=False neovim && \
+    dnf5 clean all && \
     echo "EDITOR=NVIM" >> /etc/profile
 
 RUN systemctl enable podman.socket podman-auto-update.timer && \
