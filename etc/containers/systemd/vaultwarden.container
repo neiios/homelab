@@ -1,6 +1,6 @@
 [Unit]
 Description=Vaultwarden Container
-After=network-online.target
+After=init-secrets.service
 
 [Container]
 Image=ghcr.io/dani-garcia/vaultwarden:latest
@@ -24,4 +24,4 @@ Restart=always
 TimeoutStartSec=900
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

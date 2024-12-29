@@ -1,6 +1,5 @@
 [Unit]
 Description=Caddy Container
-After=network-online.target
 
 [Container]
 Image=docker.io/library/caddy:latest
@@ -21,4 +20,4 @@ Restart=always
 TimeoutStartSec=900
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
