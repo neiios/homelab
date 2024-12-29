@@ -1,2 +1,3 @@
-- Populate secrets on first boot (e.g. Vaultwarden)
-- Use cosign
+- Wildcard certificates for Caddy
+- Sign images with cosign
+- Use sysusers for non-root user creation

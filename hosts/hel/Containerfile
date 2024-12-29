@@ -10,7 +10,7 @@ RUN dnf5 install -y htop age && \
     dnf5 clean all && \
     echo "EDITOR=NVIM" >> /etc/profile
 
-ADD etc etc
+COPY ./etc /etc
 
 RUN systemctl enable podman.socket podman-auto-update.timer init-secrets.service && \
     su core -c "systemctl --user enable podman.socket podman-auto-update.timer" && \
