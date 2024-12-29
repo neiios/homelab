@@ -1,4 +1,4 @@
 - Wildcard certificates for Caddy
 - Sign images with cosign
 - Use sysusers for non-root user creation
-- Migrate to traefik
+- Set up MTA-STS for incoming mail https://docker-mailserver.github.io/docker-mailserver/latest/config/best-practices/mta-sts/

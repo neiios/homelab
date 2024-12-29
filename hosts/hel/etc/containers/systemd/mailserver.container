@@ -1,3 +1,8 @@
+# This thing is not fully automated; I need to manually create a user on first run
+# Also setting up DKIM, DMARC, SPF and MTA-STS is manual
+# podman exec -it mailserver setup email add igor@sgf.lt
+# podman exec -it mailserver setup alias add postmaster@sgf.lt igor@sgf.lt
+# https://docker-mailserver.github.io/docker-mailserver/latest/config/best-practices/dkim_dmarc_spf/
 [Unit]
 Description=Mailserver Container
 After=init-secrets.service caddy.service
@@ -18,12 +23,12 @@ Volume=mailserver-mail-data:/var/mail/
 Volume=mailserver-mail-state:/var/mail-state/
 Volume=mailserver-mail-logs:/var/log/mail/
 Volume=mailserver-config:/tmp/docker-mailserver/
-Volume=/etc/localtime:/etc/localtime:ro
 Environment=ENABLE_FAIL2BAN=1
+Environment=ENABLE_MTA_STS=1
 StopTimeout=60
 HealthCmd="ss --listening --tcp | grep -P 'LISTEN.+:smtp' || exit 1"
 HealthTimeout=3s
-HealthRetries=0
+HealthRetries=1
 
 # WARNING! Major hack territory
 # Use SSL certs from Caddy
