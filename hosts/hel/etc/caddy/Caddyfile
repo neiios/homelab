@@ -7,3 +7,7 @@ bw.sgf.lt {
 		header_up X-Real-IP {remote_host}
 	}
 }
+
+mail.sgf.lt {
+	respond "Hello from DMS"
+}

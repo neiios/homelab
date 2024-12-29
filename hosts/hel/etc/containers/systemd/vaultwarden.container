@@ -1,6 +1,6 @@
 [Unit]
 Description=Vaultwarden Container
-After=init-secrets.service
+After=init-secrets.service caddy.service
 
 [Container]
 Image=ghcr.io/dani-garcia/vaultwarden:latest

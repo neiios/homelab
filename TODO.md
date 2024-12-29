@@ -1,3 +1,4 @@
 - Wildcard certificates for Caddy
 - Sign images with cosign
 - Use sysusers for non-root user creation
+- Migrate to traefik

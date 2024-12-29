@@ -1,0 +1,39 @@
+[Unit]
+Description=Mailserver Container
+After=init-secrets.service caddy.service
+
+[Container]
+Image=ghcr.io/docker-mailserver/docker-mailserver:latest
+ContainerName=mailserver
+AutoUpdate=registry
+
+HostName=mail.sgf.lt
+PublishPort=25:25
+PublishPort=143:143
+PublishPort=465:465
+PublishPort=587:587
+PublishPort=993:993
+AddCapability=CAP_NET_ADMIN
+Volume=mailserver-mail-data:/var/mail/
+Volume=mailserver-mail-state:/var/mail-state/
+Volume=mailserver-mail-logs:/var/log/mail/
+Volume=mailserver-config:/tmp/docker-mailserver/
+Volume=/etc/localtime:/etc/localtime:ro
+Environment=ENABLE_FAIL2BAN=1
+StopTimeout=60
+HealthCmd="ss --listening --tcp | grep -P 'LISTEN.+:smtp' || exit 1"
+HealthTimeout=3s
+HealthRetries=0
+
+# WARNING! Major hack territory
+# Use SSL certs from Caddy
+Environment=SSL_TYPE=letsencrypt
+Volume=/var/lib/containers/storage/volumes/caddy-data/_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.sgf.lt/mail.sgf.lt.crt:/etc/letsencrypt/live/mail.sgf.lt/fullchain.pem:z
+Volume=/var/lib/containers/storage/volumes/caddy-data/_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.sgf.lt/mail.sgf.lt.key:/etc/letsencrypt/live/mail.sgf.lt/privkey.pem:z
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target
