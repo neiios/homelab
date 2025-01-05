@@ -2,3 +2,4 @@
 - Sign images with cosign
 - Use sysusers for non-root user creation
 - Set up MTA-STS for incoming mail https://docker-mailserver.github.io/docker-mailserver/latest/config/best-practices/mta-sts/
+- Pre-set syncthing GUI password; blocked by [this issue](https://github.com/syncthing/syncthing/issues/8791)

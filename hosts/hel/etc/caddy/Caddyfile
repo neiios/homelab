@@ -8,6 +8,12 @@ bw.sgf.lt {
 	}
 }
 
+st.sgf.lt {
+	reverse_proxy 127.0.0.1:8384 {
+		header_up Host {upstream_hostport}
+	}
+}
+
 mail.sgf.lt {
 	respond "Hello from DMS"
 }
