@@ -6,7 +6,8 @@ After=caddy.service
 Image=docker.io/syncthing/syncthing:latest
 ContainerName=syncthing
 AutoUpdate=registry
-Environment=PUID=1000 PGID=1000
+UserNS=keep-id
+Environment=PUID=%U PGID=%G
 
 PublishPort=127.0.0.1:8384:8384
 PublishPort=22000:22000/tcp
