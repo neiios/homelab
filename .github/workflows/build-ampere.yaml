@@ -1,4 +1,4 @@
-name: Build hel image
+name: Build ampere image
 on:
   schedule:
     - cron: "0 3 * * *"
@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build bootc image
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Clone the repository
@@ -25,13 +25,13 @@ jobs:
         run: sudo apt-get install -y podman buildah skopeo
 
       - name: Build image
-        run: sudo podman build -t ghcr.io/neiios/homelab-hel:$COMMIT_HASH ./hosts/hel
+        run: sudo podman build -t ghcr.io/neiios/homelab-ampere:$COMMIT_HASH ./hosts/ampere
 
       - name: Login to ghcr
         run: sudo podman login --verbose --password '${{ secrets.GITHUB_TOKEN }}' --username neiios ghcr.io
 
       - name: Push built image
         run: |
-          sudo podman tag ghcr.io/neiios/homelab-hel:$COMMIT_HASH ghcr.io/neiios/homelab-hel:latest
-          sudo podman push ghcr.io/neiios/homelab-hel:$COMMIT_HASH
-          sudo podman push ghcr.io/neiios/homelab-hel:latest
+          sudo podman tag ghcr.io/neiios/homelab-ampere:$COMMIT_HASH ghcr.io/neiios/homelab-ampere:latest
+          sudo podman push ghcr.io/neiios/homelab-ampere:$COMMIT_HASH
+          sudo podman push ghcr.io/neiios/homelab-ampere:latest
