@@ -23,7 +23,7 @@ Volume=mailserver-mail-data:/var/mail/
 Volume=mailserver-mail-state:/var/mail-state/
 Volume=mailserver-mail-logs:/var/log/mail/
 Volume=mailserver-config:/tmp/docker-mailserver/
-Environment=ENABLE_FAIL2BAN=1
+Environment=ENABLE_FAIL2BAN=0
 Environment=ENABLE_MTA_STS=1
 StopTimeout=60
 HealthCmd="ss --listening --tcp | grep -P 'LISTEN.+:smtp' || exit 1"
