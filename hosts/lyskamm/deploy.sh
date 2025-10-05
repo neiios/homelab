@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-set -x
+# This script manages deployed containers on the server using quadlets.
+# It should be idempotent and aims to be as declarative as possible.
 
-rsync -rvt --delete *.volume *.container root@192.168.1.187:/etc/containers/systemd/
+rsync -rvt --delete ./quadlets/* root@192.168.1.187:/etc/containers/systemd/
 
 ssh root@192.168.1.187 << 'EOF'
 
-set -x
-
 systemctl daemon-reload
+
 systemctl restart \
   caddy.service \
   gluetun.service \
@@ -17,9 +17,10 @@ systemctl restart \
   prowlarr.service \
   jellyfin.service
 
-mkdir -pv \
-/var/lib/containers/storage/volumes/arr-data/_data/media/{series,movies} \
-/var/lib/containers/storage/volumes/arr-data/_data/torrents/{series,movies}
-chown -Rc 1000:1000 /var/lib/containers/storage/volumes/arr-data/_data/* 
+# TODO: figure out how to make arr apps create this folder structure automatically
+mkdir --parents --verbose \
+  /var/lib/containers/storage/volumes/arr-data/_data/media/{series,movies} \
+  /var/lib/containers/storage/volumes/arr-data/_data/torrents/{series,movies}
+chown --recursive --changes 1000:1000 /var/lib/containers/storage/volumes/arr-data/_data/* 
 
 EOF
