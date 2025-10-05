@@ -1,0 +1,18 @@
+[Container]
+ContainerName=qbittorrent
+Image=lscr.io/linuxserver/qbittorrent:latest
+AutoUpdate=registry
+
+Environment=PUID=1000 PGID=1000 TZ=Europe/Vilnius WEBUI_PORT=4201 TORRENTING_PORT=24420
+
+Network=gluetun.container
+# PublishPort=4201:4201
+
+Volume=qbittorrent-config:/config
+Volume=arr-data.volume:/data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

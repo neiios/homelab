@@ -1,0 +1,19 @@
+[Container]
+ContainerName=jellyfin
+Image=docker.io/jellyfin/jellyfin:latest
+AutoUpdate=registry
+
+User=1000
+
+Network=gluetun.container
+# PublishPort=8096:8096/tcp
+
+Volume=jellyfin-cache:/cache
+Volume=jellyfin-config:/config
+Volume=arr-data.volume:/data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

@@ -1,0 +1,17 @@
+[Container]
+ContainerName=prowlarr
+Image=lscr.io/linuxserver/prowlarr:latest
+AutoUpdate=registry
+
+Environment=PUID=1000 PGID=1000 TZ=Europe/Vilnius
+
+Network=gluetun.container
+# PublishPort=9696:9696
+
+Volume=prowlarr-config:/config
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

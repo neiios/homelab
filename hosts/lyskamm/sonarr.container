@@ -1,0 +1,18 @@
+[Container]
+ContainerName=sonarr
+Image=lscr.io/linuxserver/sonarr:latest
+AutoUpdate=registry
+
+Environment=PUID=1000 PGID=1000 TZ=Europe/Vilnius
+
+Network=gluetun.container
+#PublishPort=8989:8989
+
+Volume=sonarr-config:/config
+Volume=arr-data.volume:/data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

@@ -1,0 +1,37 @@
+[Container]
+ContainerName=gluetun
+Image=docker.io/qmcgaw/gluetun:latest
+AutoUpdate=registry
+
+AddCapability=NET_ADMIN NET_RAW
+AddDevice=/dev/net/tun:/dev/net/tun
+
+Volume=gluetun-data:/gluetun
+
+# TODO: replace with caddy proxy
+# jellyfin
+PublishPort=8096:8096
+# prowlarr
+PublishPort=9696:9696
+# sonarr
+PublishPort=8989:8989
+# qbittorrent
+PublishPort=4201:4201
+
+Environment=VPN_TYPE=wireguard
+Environment=UPDATER_PERIOD=24h
+# TODO: contribute mullvad dns support
+Environment=DOT_PROVIDERS=quad9 BLOCK_MALICIOUS=off BLOCK_SURVEILLANCE=off BLOCK_ADS=off
+
+Secret=gluetun_vpn_service_provider,type=env,target=VPN_SERVICE_PROVIDER
+Secret=gluetun_server_countries,type=env,target=SERVER_COUNTRIES
+Secret=gluetun_firewall_vpn_input_ports,type=env,target=FIREWALL_VPN_INPUT_PORTS
+Secret=gluetun_wireguard_private_key,type=env,target=WIREGUARD_PRIVATE_KEY
+Secret=gluetun_wireguard_preshared_key,type=env,target=WIREGUARD_PRESHARED_KEY
+Secret=gluetun_wireguard_addresses,type=env,target=WIREGUARD_ADDRESSES
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target
