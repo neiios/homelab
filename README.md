@@ -1,13 +1,13 @@
-# New New Homelab: "Everything is a Container" Edition
+# New New Homelab - Containers! Containers! Containers! 
 
-An experimental homelab powered by `bootc`.
+## Lyskamm Bootstrap
 
-A customized Fedora-based image is built daily with GitHub Actions.
-Existing servers get upgraded automatically.
+- Init secrets with `init-secrets.sh`
+- Sync quadlets with `deploy.sh`
+- Configure arr stack
 
 ## Hel Bootstrap
 
-On first boot:
-
+- Blast bootc image to the disk
 - Create mailserver users and aliases
 - Set syncthing container GUI user and password
