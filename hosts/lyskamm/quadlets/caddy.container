@@ -3,8 +3,19 @@ ContainerName=caddy
 Image=ghcr.io/neiios/caddy:latest
 AutoUpdate=registry
 
-PublishPort=80:80
-PublishPort=443:443
+# PublishPort=80:80
+# PublishPort=443:443
+Network=host
+# To increase UDP buffer size. See https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
+AddCapability=NET_ADMIN
+
+Volume=/etc/containers/systemd/caddy/:/etc/caddy/
+Volume=caddy-data:/data/
+
+Secret=caddy_ovh_endpoint,type=env,target=OVH_ENDPOINT
+Secret=caddy_ovh_application_key,type=env,target=OVH_APPLICATION_KEY
+Secret=caddy_ovh_application_secret,type=env,target=OVH_APPLICATION_SECRET
+Secret=caddy_ovh_consumer_key,type=env,target=OVH_CONSUMER_KEY
 
 [Service]
 Restart=always
