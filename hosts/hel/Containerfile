@@ -16,7 +16,7 @@ RUN systemctl enable podman.socket podman-auto-update.timer init-secrets.service
     su core -c "systemctl --user enable podman.socket podman-auto-update.timer" && \
     echo "hel" > /etc/hostname
 
-RUN <<EOF 
+RUN <<EOF
 dnf5 install -y dnf5-plugin-config-manager
 dnf5 config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 dnf5 install -y tailscale
