@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     container:
       image: mgoltzsche/podman:latest
-      options: --privileged --security-opt seccomp=unconfined
+      options: --privileged
 
     steps:
       - name: Clone the repository
@@ -22,7 +22,9 @@ jobs:
           persist-credentials: false
 
       - name: Set env
-        run: echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        run: |
+          apk add --no-cache git
+          echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Build image
         run: podman build -t ghcr.io/neiios/homelab-hel:$COMMIT_HASH ./hosts/hel
