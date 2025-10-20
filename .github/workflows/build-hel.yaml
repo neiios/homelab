@@ -16,20 +16,13 @@ jobs:
       options: --privileged
 
     steps:
-      - name: Clone repo
+      - name: Execute
         run: |
           apk add --no-cache git
           git clone https://github.com/neiios/homelab homelab
           cd homelab
-
-      - name: Build image
-        run: podman build -t ghcr.io/neiios/homelab-hel:$(git rev-parse HEAD) ./hosts/hel
-
-      - name: Login to ghcr
-        run: podman login --verbose --password '${{ secrets.GITHUB_TOKEN }}' --username neiios ghcr.io
-
-      - name: Push built image
-        run: |
+          podman build -t ghcr.io/neiios/homelab-hel:$(git rev-parse HEAD) ./hosts/hel
+          podman login --verbose --password '${{ secrets.GITHUB_TOKEN }}' --username neiios ghcr.io
           podman tag ghcr.io/neiios/homelab-hel:$(git rev-parse HEAD) ghcr.io/neiios/homelab-hel:latest
           podman push ghcr.io/neiios/homelab-hel:$(git rev-parse HEAD)
           podman push ghcr.io/neiios/homelab-hel:latest
