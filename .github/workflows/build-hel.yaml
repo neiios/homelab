@@ -25,13 +25,13 @@ jobs:
         run: echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Build image
-        run: sudo podman build -t ghcr.io/neiios/homelab-hel:$COMMIT_HASH ./hosts/hel
+        run: podman build -t ghcr.io/neiios/homelab-hel:$COMMIT_HASH ./hosts/hel
 
       - name: Login to ghcr
-        run: sudo podman login --verbose --password '${{ secrets.GITHUB_TOKEN }}' --username neiios ghcr.io
+        run: podman login --verbose --password '${{ secrets.GITHUB_TOKEN }}' --username neiios ghcr.io
 
       - name: Push built image
         run: |
-          sudo podman tag ghcr.io/neiios/homelab-hel:$COMMIT_HASH ghcr.io/neiios/homelab-hel:latest
-          sudo podman push ghcr.io/neiios/homelab-hel:$COMMIT_HASH
-          sudo podman push ghcr.io/neiios/homelab-hel:latest
+          podman tag ghcr.io/neiios/homelab-hel:$COMMIT_HASH ghcr.io/neiios/homelab-hel:latest
+          podman push ghcr.io/neiios/homelab-hel:$COMMIT_HASH
+          podman push ghcr.io/neiios/homelab-hel:latest
