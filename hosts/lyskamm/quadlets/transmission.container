@@ -1,0 +1,21 @@
+[Container]
+ContainerName=transmission
+Image=lscr.io/linuxserver/transmission:latest
+AutoUpdate=registry
+
+Environment=PUID=1000 PGID=1000 TZ=Europe/Vilnius PEERPORT=24420
+
+Network=gluetun.container
+# PublishPort=9091:9091
+
+# TODO: add auth
+
+Volume=transmission-config:/config
+Volume=transmission-watch:/watch
+Volume=arr-data.volume:/data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target default.target

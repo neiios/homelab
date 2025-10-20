@@ -8,7 +8,7 @@ AddDevice=/dev/net/tun:/dev/net/tun
 
 Volume=gluetun-data:/gluetun
 
-# TODO: replace with caddy proxy
+# TODO: connect caddy to gluetun network and don't expose ports
 # jellyfin
 PublishPort=8096:8096
 # prowlarr
@@ -17,6 +17,8 @@ PublishPort=9696:9696
 PublishPort=8989:8989
 # qbittorrent
 PublishPort=4201:4201
+# transmission
+PublishPort=9091:9091
 
 Environment=VPN_TYPE=wireguard
 Environment=UPDATER_PERIOD=24h
