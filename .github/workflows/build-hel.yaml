@@ -16,15 +16,16 @@ jobs:
       options: --privileged
 
     steps:
+      - name: Install git
+        run: apk add --no-cache git
+
       - name: Clone the repository
         uses: actions/checkout@v4
         with:
           persist-credentials: false
 
       - name: Set env
-        run: |
-          apk add --no-cache git
-          echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+        run: echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Build image
         run: podman build -t ghcr.io/neiios/homelab-hel:$COMMIT_HASH ./hosts/hel
