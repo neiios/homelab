@@ -12,10 +12,8 @@ AddCapability=NET_ADMIN
 Volume=/etc/containers/systemd/caddy/:/etc/caddy/
 Volume=caddy-data:/data/
 
-Secret=caddy_ovh_endpoint,type=env,target=OVH_ENDPOINT
-Secret=caddy_ovh_application_key,type=env,target=OVH_APPLICATION_KEY
-Secret=caddy_ovh_application_secret,type=env,target=OVH_APPLICATION_SECRET
-Secret=caddy_ovh_consumer_key,type=env,target=OVH_CONSUMER_KEY
+Secret=caddy_porkbun_api_key,type=env,target=PORKBUN_API_KEY
+Secret=caddy_porkbun_api_secret_key,type=env,target=PORKBUN_API_SECRET_KEY
 
 [Service]
 Restart=always
