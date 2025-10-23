@@ -1,4 +1,4 @@
-*.sgf.lt {
+*.localhost25565.com {
 	tls {
 		# TODO: document why these two lines are needed
 		propagation_timeout -1
