@@ -10,7 +10,8 @@
 		}
 	}
 
-	jellyfin.localhost25565.com {
+	@jellyfin host jellyfin.localhost25565.com
+	handle @jellyfin {
 		reverse_proxy 127.0.0.1:8096 {
 			header_up X-Real-IP {remote_host}
 		}

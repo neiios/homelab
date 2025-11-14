@@ -10,23 +10,27 @@
 		}
 	}
 
-	hel.localhost25565.com {
+	@hel host hel.localhost25565.com
+	handle @hel {
 		respond "Oh, hi Mark!"
 	}
 
-	bw.localhost25565.com {
+	@bitwarden host bw.localhost25565.com
+	handle @bitwarden {
 		reverse_proxy 127.0.0.1:8000 {
 			header_up X-Real-IP {remote_host}
 		}
 	}
 
-	st.localhost25565.com {
+	@syncthing host st.localhost25565.com
+	handle @syncthing {
 		reverse_proxy 127.0.0.1:8384 {
 			header_up Host {upstream_hostport}
 		}
 	}
 
-	mail.localhost25565.com {
+	@dms host mail.localhost25565.com
+	handle @dms {
 		respond "Hello from DMS"
 	}
 }
