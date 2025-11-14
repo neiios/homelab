@@ -1,10 +1,9 @@
 # This thing is not fully automated; I need to manually create a user on first run
 # Also setting up DKIM, DMARC, SPF and MTA-STS is manual
-# podman exec -it mailserver setup email add igor@sgf.lt
-# podman exec -it mailserver setup alias add postmaster@sgf.lt igor@sgf.lt
+# podman exec -it mailserver setup email add igor@localhost25565.com
+# podman exec -it mailserver setup alias add postmaster@localhost25565.com igor@localhost25565.com
 # https://docker-mailserver.github.io/docker-mailserver/latest/config/best-practices/dkim_dmarc_spf/
 [Unit]
-Description=Mailserver Container
 After=init-secrets.service caddy.service
 
 [Container]
@@ -12,7 +11,7 @@ Image=ghcr.io/docker-mailserver/docker-mailserver:latest
 ContainerName=mailserver
 AutoUpdate=registry
 
-HostName=mail.sgf.lt
+HostName=mail.localhost25565.com
 PublishPort=25:25
 PublishPort=143:143
 PublishPort=465:465
@@ -33,8 +32,8 @@ HealthRetries=1
 # WARNING! Major hack territory
 # Use SSL certs from Caddy
 Environment=SSL_TYPE=letsencrypt
-Volume=/var/lib/containers/storage/volumes/caddy-data/_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.sgf.lt/mail.sgf.lt.crt:/etc/letsencrypt/live/mail.sgf.lt/fullchain.pem:z
-Volume=/var/lib/containers/storage/volumes/caddy-data/_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.sgf.lt/mail.sgf.lt.key:/etc/letsencrypt/live/mail.sgf.lt/privkey.pem:z
+Volume=/var/lib/containers/storage/volumes/caddy-data/_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.localhost25565.com/mail.localhost25565.com.crt:/etc/letsencrypt/live/mail.localhost25565.com/fullchain.pem:z
+Volume=/var/lib/containers/storage/volumes/caddy-data/_data/caddy/certificates/acme-v02.api.letsencrypt.org-directory/mail.localhost25565.com/mail.localhost25565.com.key:/etc/letsencrypt/live/mail.localhost25565.com/privkey.pem:z
 
 [Service]
 Restart=always

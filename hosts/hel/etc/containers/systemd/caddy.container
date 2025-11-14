@@ -1,19 +1,20 @@
-[Unit]
-Description=Caddy Container
-
 [Container]
-Image=docker.io/library/caddy:latest
 ContainerName=caddy
+Image=ghcr.io/neiios/caddy:latest
 AutoUpdate=registry
 
-# PublishPort=80:80/tcp
-# PublishPort=443:443/tcp
-# PublishPort=443:443/udp
-# AddCapability=NET_ADMIN
+# PublishPort=80:80
+# PublishPort=443:443
 # TODO: Add a separate caddy network and add containers to it
 Network=host
+# To increase UDP buffer size. See https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
+AddCapability=NET_ADMIN
+
 Volume=/etc/caddy/:/etc/caddy/
 Volume=caddy-data:/data/
+
+Secret=caddy_porkbun_api_key,type=env,target=PORKBUN_API_KEY
+Secret=caddy_porkbun_api_secret_key,type=env,target=PORKBUN_API_SECRET_KEY
 
 [Service]
 Restart=always

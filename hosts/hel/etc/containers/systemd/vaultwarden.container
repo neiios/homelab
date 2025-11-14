@@ -1,5 +1,4 @@
 [Unit]
-Description=Vaultwarden Container
 After=init-secrets.service caddy.service
 
 [Container]
@@ -9,9 +8,9 @@ AutoUpdate=registry
 
 PublishPort=127.0.0.1:8000:80
 Volume=vaultwarden-data:/data/
-Environment=DOMAIN=https://bw.sgf.lt
+Environment=DOMAIN=https://bw.localhost25565.com
 Environment=SIGNUPS_ALLOWED=false
-Environment=SMTP_HOST=mail.sgf.lt SMTP_FROM=robotukas@sgf.lt SMTP_USERNAME=robotukas@sgf.lt
+Environment=SMTP_HOST=mail.localhost25565.com SMTP_FROM=robotukas@localhost25565.com SMTP_USERNAME=robotukas@localhost25565.com
 Environment=EXPERIMENTAL_CLIENT_FEATURE_FLAGS=extension-refresh
 # Uhm, this is a pretty bad privacy issue in the Bitwarden protocol
 # https://bitwarden.com/help/website-icons/

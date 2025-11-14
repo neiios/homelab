@@ -1,19 +1,32 @@
-hel.sgf.lt {
-	respond "Oh, hi Mark!"
-}
+*.localhost25565.com {
+	tls {
+		# TODO: document why these two lines are needed
+		propagation_timeout -1
+		propagation_delay 30s
 
-bw.sgf.lt {
-	reverse_proxy 127.0.0.1:8000 {
-		header_up X-Real-IP {remote_host}
+		dns porkbun {
+			api_key {$PORKBUN_API_KEY}
+			api_secret_key {$PORKBUN_API_SECRET_KEY}
+		}
 	}
-}
 
-st.sgf.lt {
-	reverse_proxy 127.0.0.1:8384 {
-		header_up Host {upstream_hostport}
+	hel.localhost25565.com {
+		respond "Oh, hi Mark!"
 	}
-}
 
-mail.sgf.lt {
-	respond "Hello from DMS"
+	bw.localhost25565.com {
+		reverse_proxy 127.0.0.1:8000 {
+			header_up X-Real-IP {remote_host}
+		}
+	}
+
+	st.localhost25565.com {
+		reverse_proxy 127.0.0.1:8384 {
+			header_up Host {upstream_hostport}
+		}
+	}
+
+	mail.localhost25565.com {
+		respond "Hello from DMS"
+	}
 }

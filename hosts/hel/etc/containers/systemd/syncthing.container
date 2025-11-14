@@ -1,5 +1,4 @@
 [Unit]
-Description=Syncthing Container
 After=caddy.service
 
 [Container]
